@@ -10,7 +10,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 # data and scripts
-[*.{md,sh,yaml,yml,json]}]
+[*.{md,sh,yaml,yml,json}]
 charset = utf-8
 end_of_line = lf
 indent_style = space
