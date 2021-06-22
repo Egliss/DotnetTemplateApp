@@ -1,0 +1,10 @@
+# VisualStudio
+.vs/
+**/*.user
+
+# csharp project build
+bin/
+obj/
+
+# csharp project publish artifact
+publish/
