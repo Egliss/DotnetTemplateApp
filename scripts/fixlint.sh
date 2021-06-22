@@ -1,0 +1,2 @@
+
+dotnet format --fix-whitespace
