@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "TemplateAppGenerator": {
+      "commandName": "Project"
+    }
+  }
+}
