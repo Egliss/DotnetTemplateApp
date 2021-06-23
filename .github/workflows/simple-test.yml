@@ -1,0 +1,19 @@
+name: simple-test
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: ["3.1.x"] # '5.0.x'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: lint
+        run: ./scripts/lint.sh
+      - name: build
+        run: ./scripts/build.sh
+      - name: test
+        run: ./scripts/test.sh
