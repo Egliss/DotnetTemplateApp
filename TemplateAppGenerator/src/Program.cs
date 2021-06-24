@@ -1,12 +1,22 @@
 using System;
+using TemplateAppGenerator.Core;
 
 namespace TemplateAppGenerator
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ValidateArgument(args);
+            ProjectGeneratorCli cli = new ProjectGeneratorCli();
+            cli.Run();
+        }
+
+        private static void ValidateArgument(in string[] args)
+        {
+            if (args.Length > 0)
+            {
+            }
         }
     }
 }
