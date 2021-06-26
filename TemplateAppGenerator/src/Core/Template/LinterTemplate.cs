@@ -26,7 +26,7 @@ namespace TemplateAppGenerator.Core.Template
             var blank = new string(' ', hierarchy * 2);
             var simpleMode = argument.store.QueryContent<RootTemplate>().isSimpleMode;
 
-            if (simpleMode is false)
+            if (simpleMode is true)
             {
                 this.useEditorConfig = true;
                 this.useDotnetFormat = true;
