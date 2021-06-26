@@ -12,7 +12,7 @@ namespace TemplateAppGenerator.Core
         public IEnumerable<T> WaitMultiInput<T>(MultiInputRequest<T> request) where T : struct, Enum;
     }
 
-    internal class SharpPromptInputProcessor : IConsoleInputProcessor
+    internal class SharomptInputProcessor : IConsoleInputProcessor
     {
         public T WaitInput<T>(InputRequest<T> request)
         {
