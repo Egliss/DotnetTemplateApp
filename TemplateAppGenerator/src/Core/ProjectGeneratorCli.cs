@@ -11,7 +11,7 @@ namespace TemplateAppGenerator.Core
     {
         public ProjectGeneratorCli(IConsoleInputProcessor processor = null, IProjectTemplateContentStore store = null)
         {
-            this.consoleProcessor = processor ?? new SharpPromptInputProcessor();
+            this.consoleProcessor = processor ?? new SharomptInputProcessor();
             this.store = store ?? new ProjectTemplateContentStore();
             this.activeContent = new RootTemplate();
         }
