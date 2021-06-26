@@ -15,7 +15,7 @@ namespace TemplateAppGenerator.Core.Template
     {
         public string name => "project construction";
 
-        public ProjectFrameworkType framrwork { get; private set;  }
+        public ProjectFrameworkType framrwork { get; private set; }
 
         public void InteractUser(in TemplateArguments argument)
         {
@@ -29,7 +29,7 @@ namespace TemplateAppGenerator.Core.Template
 
         public void Generate(in TemplateArguments argument)
         {
-            
+
 
         }
     }

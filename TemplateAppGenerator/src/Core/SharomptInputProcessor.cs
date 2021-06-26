@@ -22,7 +22,7 @@ namespace TemplateAppGenerator.Core
                 request.validator
             };
 
-            T data = default (T);
+            T data = default(T);
             if (request.usePasswordMode)
             {
                 // TODO type 
@@ -40,7 +40,7 @@ namespace TemplateAppGenerator.Core
             // TODO validate
             return data;
         }
-        public IEnumerable<T> WaitMultiSelectInput<T>(SelectMultiInputRequest <T> request)
+        public IEnumerable<T> WaitMultiSelectInput<T>(SelectMultiInputRequest<T> request)
         {
             var data = Prompt.MultiSelect(request.text, defaultValues: request.defaultValues, items: request.items);
 
