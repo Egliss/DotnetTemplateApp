@@ -6,12 +6,13 @@ using System.Text.RegularExpressions;
 
 namespace TemplateAppGenerator.Core.Template
 {
-    public class RootTemplate : IProjectTemplateContent
+    public sealed class RootTemplate : IProjectTemplateContent
     {
         public string name => "root";
 
         public bool isSimpleMode { get; private set; }
         public string projectName { get; private set; }
+
         public void InteractUser(in TemplateArguments argument)
         {
             (var processor, var store, var token, var hierarchy) = argument;
@@ -29,8 +30,18 @@ namespace TemplateAppGenerator.Core.Template
                 validator = ValidateProjectName
             });
 
+            this.InteractProjectEnvironment(argument);
+        }
+
+        public void InteractProjectEnvironment(in TemplateArguments argument)
+        {
+            var projectType = argument.store.QueryContent<ProjectTypeTemplate>();
             var linter = argument.store.QueryContent<LinterTemplate>();
-            linter.InteractUser(argument with { hierarchy = hierarchy + 1 });
+            var arg = argument with { hierarchy = argument.hierarchy + 1 };
+
+            linter.InteractUser(arg);
+
+            projectType.InteractUser(arg);
         }
 
         public static ValidationResult ValidateProjectName(object obj)

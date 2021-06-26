@@ -8,7 +8,7 @@ namespace TemplateAppGenerator.Core.Template
     /// <summary>
     /// LinterTemplate provide .editorconfig and dotnet format(dotnet tool) installation.
     /// </summary>
-    public class LinterTemplate : IProjectTemplateContent
+    public sealed class LinterTemplate : IProjectTemplateContent
     {
         public string name => "linter";
 

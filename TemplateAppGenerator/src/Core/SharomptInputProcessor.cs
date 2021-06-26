@@ -9,7 +9,8 @@ namespace TemplateAppGenerator.Core
     public interface IConsoleInputProcessor
     {
         public T WaitInput<T>(InputRequest<T> request);
-        public IEnumerable<T> WaitMultiInput<T>(MultiInputRequest<T> request) where T : struct, Enum;
+        public T WaitSelectInput<T>(SelectInputRequest<T> request);
+        public IEnumerable<T> WaitMultiSelectInput<T>(SelectMultiInputRequest<T> request);
     }
 
     internal class SharomptInputProcessor : IConsoleInputProcessor
@@ -20,13 +21,30 @@ namespace TemplateAppGenerator.Core
             {
                 request.validator
             };
-            var data = Prompt.Input<T>(request.text, request.defaultValue, validators);
+
+            T data = default (T);
+            if (request.usePasswordMode)
+            {
+                // TODO type 
+            }
+            else
+            {
+                data = Prompt.Input<T>(request.text, request.defaultValue, validators);
+            }
             return data;
         }
-
-        public IEnumerable<T> WaitMultiInput<T>(MultiInputRequest<T> request) where T : struct, Enum
+        public T WaitSelectInput<T>(SelectInputRequest<T> request)
         {
-            var data = Prompt.MultiSelect<T>(request.text, defaultValues: request.defaultValues);
+            var data = Prompt.Select(request.text, defaultValue: request.defaultValue, items: request.items);
+
+            // TODO validate
+            return data;
+        }
+        public IEnumerable<T> WaitMultiSelectInput<T>(SelectMultiInputRequest <T> request)
+        {
+            var data = Prompt.MultiSelect(request.text, defaultValues: request.defaultValues, items: request.items);
+
+            // TODO validate date
             return data;
         }
     }
