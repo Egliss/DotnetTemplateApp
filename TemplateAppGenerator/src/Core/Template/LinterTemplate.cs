@@ -10,7 +10,7 @@ namespace TemplateAppGenerator.Core.Template
     /// </summary>
     public sealed class LinterTemplate : IProjectTemplateContent
     {
-        public string name => "linter";
+        public string name => "Lint";
 
         public bool useEditorConfig { get; private set; } = false;
         public bool useDotnetFormat { get; private set; } = false;
@@ -20,11 +20,9 @@ namespace TemplateAppGenerator.Core.Template
             throw new NotImplementedException();
         }
 
-        public void InteractUser(in TemplateArguments argument)
+        public void InteractUser(in TemplateArguments arg)
         {
-            (var processor, var store, var token, var hierarchy) = argument;
-            var blank = new string(' ', hierarchy * 2);
-            var simpleMode = argument.store.QueryContent<SharedTemplate>().isSimpleMode;
+            var simpleMode = arg.store.QueryContent<SharedTemplate>().isSimpleMode;
 
             if (simpleMode is true)
             {
@@ -33,17 +31,17 @@ namespace TemplateAppGenerator.Core.Template
                 return;
             }
 
-            this.useEditorConfig = processor.WaitInput<bool>(new InputRequest<bool>
+            this.useEditorConfig = arg.processor.WaitInput<bool>(new InputRequest<bool>
             {
-                text = $"{blank}use .editorconfig",
+                text = $"{arg.HierarchyBlank}use .editorconfig",
                 defaultValue = true
             });
             if (this.useEditorConfig is false)
                 return;
 
-            this.useDotnetFormat = processor.WaitInput<bool>(new InputRequest<bool>
+            this.useDotnetFormat = arg.processor.WaitInput<bool>(new InputRequest<bool>
             {
-                text = $"{blank}use dotnet-format(https://github.com/dotnet/format)",
+                text = $"{arg.HierarchyBlank}use dotnet-format(https://github.com/dotnet/format)",
                 defaultValue = true
             });
         }
