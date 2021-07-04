@@ -20,15 +20,35 @@ namespace TemplateAppGenerator.Core.Template
                 text = $"{blank}use simple mode",
                 defaultValue = true
             });
-            this.projectDirectory = processor.WaitInput<string>(new InputRequest<string>
+            do
             {
-                text = $"{blank}project generate directory",
-                defaultValue = Path.GetFullPath(Environment.CurrentDirectory),
-            });
+                this.projectDirectory = processor.WaitInput<string>(new InputRequest<string>
+                {
+                    text = $"{blank}project generate directory",
+                    defaultValue = Path.GetFullPath(Environment.CurrentDirectory),
+                });
+
+                // Edit will safe 
+                if (Directory.Exists(this.projectDirectory) is false)
+                    break;
+                if (Directory.GetFiles(this.projectDirectory, "*").Length == 0)
+                    break;
+                // or user allow edit
+            } while (InteractProjectExistFiles(arg.processor) is false);
+
             generator.NestInteractTo<ProjectTypeTemplate>(arg);
             generator.NestInteractTo<LinterTemplate>(arg);
         }
 
+        private static bool InteractProjectExistFiles(IConsoleInputProcessor processor)
+        {
+            var projectYesNoRequest = new SelectYesNoInputRequest()
+            {
+                defaultValue = true,
+                text = "There are already some files in the directory. Do you want to continue?"
+            };
+            return processor.WaitYesNoSelect(projectYesNoRequest);
+        }
 
         public void Generate(in TemplateArguments argument)
         {
