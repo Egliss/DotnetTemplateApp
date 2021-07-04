@@ -31,7 +31,7 @@ namespace TemplateAppGenerator.Core.Template
                 return;
             }
 
-            this.useEditorConfig = arg.processor.WaitInput<bool>(new InputRequest<bool>
+            this.useEditorConfig = arg.processor.WaitYesNoSelect(new SelectYesNoInputRequest
             {
                 text = $"{arg.HierarchyBlank}use .editorconfig",
                 defaultValue = true
@@ -39,7 +39,7 @@ namespace TemplateAppGenerator.Core.Template
             if (this.useEditorConfig is false)
                 return;
 
-            this.useDotnetFormat = arg.processor.WaitInput<bool>(new InputRequest<bool>
+            this.useDotnetFormat = arg.processor.WaitYesNoSelect(new SelectYesNoInputRequest
             {
                 text = $"{arg.HierarchyBlank}use dotnet-format(https://github.com/dotnet/format)",
                 defaultValue = true

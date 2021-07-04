@@ -1,5 +1,6 @@
 using FastEnumUtility;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace TemplateAppGenerator.Core.Template

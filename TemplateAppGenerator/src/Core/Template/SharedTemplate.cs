@@ -15,7 +15,7 @@ namespace TemplateAppGenerator.Core.Template
             (var generator, var processor, var store, var token, var hierarchy) = arg;
             var blank = new string(' ', hierarchy * 2);
 
-            this.isSimpleMode = processor.WaitInput<bool>(new InputRequest<bool>
+            this.isSimpleMode = processor.WaitYesNoSelect(new SelectYesNoInputRequest
             {
                 text = $"{blank}use simple mode",
                 defaultValue = true

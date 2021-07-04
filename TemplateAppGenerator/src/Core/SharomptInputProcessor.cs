@@ -9,6 +9,7 @@ namespace TemplateAppGenerator.Core
     public interface IConsoleInputProcessor
     {
         public T WaitInput<T>(InputRequest<T> request);
+        public bool WaitYesNoSelect(SelectYesNoInputRequest request);
         public T WaitSelectInput<T>(SelectInputRequest<T> request);
         public IEnumerable<T> WaitMultiSelectInput<T>(SelectMultiInputRequest<T> request);
     }
@@ -45,6 +46,12 @@ namespace TemplateAppGenerator.Core
             var data = Prompt.MultiSelect(request.text, defaultValues: request.defaultValues, items: request.items);
 
             // TODO validate date
+            return data;
+        }
+
+        public bool WaitYesNoSelect(SelectYesNoInputRequest request)
+        {
+            var data = Prompt.Select(request.text, defaultValue: request.defaultValue, items: new bool[] { true, false });
             return data;
         }
     }

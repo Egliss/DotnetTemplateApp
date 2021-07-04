@@ -12,6 +12,12 @@ namespace TemplateAppGenerator.Core
         public Func<object, ValidationResult> validator { get; init; } = (param) => ValidationResult.Success;
     }
 
+    public sealed record SelectYesNoInputRequest
+    {
+        public string text { get; set; }
+        public bool defaultValue { get; set; }
+    }
+
     public sealed record SelectInputRequest<T>
     {
         public string text { get; set; }

@@ -8,13 +8,11 @@ namespace TemplateAppGenerator.Core
     {
         private readonly IConsoleInputProcessor consoleProcessor = null;
         private readonly IProjectTemplateContentStore store = null;
-        private IProjectTemplateContent activeContent = null;
 
         public ProjectGeneratorCli(IConsoleInputProcessor processor = null, IProjectTemplateContentStore store = null)
         {
             this.consoleProcessor = processor ?? new SharomptInputProcessor();
             this.store = store ?? new ProjectTemplateContentStore();
-            this.activeContent = new SharedTemplate();
         }
 
         public void Run(CancellationToken token = default(CancellationToken))
