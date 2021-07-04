@@ -1,16 +1,16 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace TemplateAppGenerator.Core.Template
 {
-    public sealed class RootTemplate : IProjectTemplateContent
+    public sealed class SharedTemplate : IProjectTemplateContent
     {
-        public string name => "root";
+        public string name => "shared";
 
         public bool isSimpleMode { get; private set; }
+        public string projectDirectory { get; private set; }
         public string projectName { get; private set; }
 
         public void InteractUser(in TemplateArguments argument)
@@ -23,6 +23,11 @@ namespace TemplateAppGenerator.Core.Template
                 text = $"{blank}use simple mode",
                 defaultValue = true
             });
+            this.projectDirectory = processor.WaitInput<string>(new InputRequest<string>
+            {
+                text = $"{blank}project generate directory",
+                defaultValue = Path.GetFullPath(Environment.CurrentDirectory),
+            });
             this.projectName = processor.WaitInput<string>(new InputRequest<string>
             {
                 text = $"{blank}project name",
@@ -32,7 +37,6 @@ namespace TemplateAppGenerator.Core.Template
 
             this.InteractProjectEnvironment(argument);
         }
-
         public void InteractProjectEnvironment(in TemplateArguments argument)
         {
             var projectType = argument.store.QueryContent<ProjectTypeTemplate>();
@@ -40,7 +44,6 @@ namespace TemplateAppGenerator.Core.Template
             var arg = argument with { hierarchy = argument.hierarchy + 1 };
 
             linter.InteractUser(arg);
-
             projectType.InteractUser(arg);
         }
 

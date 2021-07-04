@@ -24,7 +24,7 @@ namespace TemplateAppGenerator.Core.Template
         {
             (var processor, var store, var token, var hierarchy) = argument;
             var blank = new string(' ', hierarchy * 2);
-            var simpleMode = argument.store.QueryContent<RootTemplate>().isSimpleMode;
+            var simpleMode = argument.store.QueryContent<SharedTemplate>().isSimpleMode;
 
             if (simpleMode is true)
             {

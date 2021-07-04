@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using TemplateAppGenerator.Core.Template;
 
 namespace TemplateAppGenerator.Core
@@ -13,7 +9,7 @@ namespace TemplateAppGenerator.Core
         {
             this.consoleProcessor = processor ?? new SharomptInputProcessor();
             this.store = store ?? new ProjectTemplateContentStore();
-            this.activeContent = new RootTemplate();
+            this.activeContent = new SharedTemplate();
         }
 
         public void Run(CancellationToken token = default(CancellationToken))
@@ -25,7 +21,7 @@ namespace TemplateAppGenerator.Core
         private void InteractUser(CancellationToken token)
         {
             var argument = new TemplateArguments(this.consoleProcessor, this.store, token);
-            var root = argument.store.QueryContent<RootTemplate>();
+            var root = argument.store.QueryContent<SharedTemplate>();
             this.activeContent = root;
             this.activeContent.InteractUser(argument);
         }
