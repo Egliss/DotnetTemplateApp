@@ -2,18 +2,10 @@ using Sharprompt;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using TemplateAppGenerator.Core.Services;
 
-namespace TemplateAppGenerator.Core
+namespace TemplateAppGenerator.Core.Cli
 {
-    public interface IConsoleInputProcessor
-    {
-        public T WaitInput<T>(InputRequest<T> request);
-        public bool WaitYesNoSelect(SelectYesNoInputRequest request);
-        public T WaitSelectInput<T>(SelectInputRequest<T> request);
-        public IEnumerable<T> WaitMultiSelectInput<T>(SelectMultiInputRequest<T> request);
-    }
-
     internal class SharomptInputProcessor : IConsoleInputProcessor
     {
         public T WaitInput<T>(InputRequest<T> request)
@@ -26,7 +18,7 @@ namespace TemplateAppGenerator.Core
             T data = default(T);
             if (request.usePasswordMode)
             {
-                // TODO type 
+                throw new NotImplementedException("password mode is not implemented");
             }
             else
             {

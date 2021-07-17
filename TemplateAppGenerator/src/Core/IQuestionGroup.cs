@@ -4,7 +4,9 @@ using System.Text;
 
 namespace TemplateAppGenerator.Core
 {
-    public interface IProjectGenerator
+    public interface IQuestionGroup
     {
+        public string name { get; }
+        public int order { get; }
     }
 }
